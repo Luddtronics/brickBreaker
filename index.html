@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Smash the State</title>
+    <meta name="description" content="javascript game about smashing the state as represented by blue bricks" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.png">
+</head>
+
+<body>
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+<script>
+var canvas;
+var ctx;
+var ballX = 75, ballY = 75;
+var ballSpeedX = 10, ballSpeedY = 10;
+
+window.onload= function() {
+    canvas = document.getElementById('gameCanvas');
+    ctx = canvas.getContext('2d');
+
+    const framesPerSecond = 30;
+    setInterval(function() {
+        moveEverything();
+        drawEverything();
+    }, 1000/framesPerSecond);
+}
+
+function moveEverything() {
+    if (ballX > canvas.width || ballX < 0) {
+        ballSpeedX *= -1; // reverse ball direction on wall impact on x axis
+    }
+
+    if (ballY > canvas.height || ballY < 0) {
+        ballSpeedY *= -1; // reverse ball direction on wall impact on y axis
+    }
+
+    ballX += ballSpeedX;
+    ballY += ballSpeedY;
+}
+
+function drawEverything() {
+
+    // draw the background
+    colorRect(0, 0, canvas.width, canvas.height, '#000000');
+
+    //draw the ball
+    colorCircle(ballX, ballY, 10, "#FFFFFF");
+}
+
+function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor) {
+    ctx.fillStyle = fillColor;
+    ctx.fillRect(topLeftX, topLeftY, boxWidth, boxHeight);
+}
+function colorCircle(centerX, centerY, radius, fillColor) {
+    ctx.fillStyle = fillColor;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, Math.PI*2, true);
+    ctx.fill();
+}
+function writeText(showWords, textX, textY, fillColor) {
+    ctx.fillStyle = fillColor;
+    ctx.fillText(showWords, textX, textY);
+  }
+</script>
+</body>
+
+</html>
