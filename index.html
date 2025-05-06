@@ -16,13 +16,13 @@ var canvas;
 var ctx;
 var ballX = 75, ballY = 75;
 var ballSpeedX = 10, ballSpeedY = 10;
-var paddleX = 400;
+var paddleX = 400
 const PADDLE_WIDTH = 100, PADDLE_HEIGHT = 10;
 
 window.onload= function() {
     canvas = document.getElementById('gameCanvas');
     ctx = canvas.getContext('2d');
-
+    paddleY = canvas.height - 25;
     // mouse controller
     canvas.addEventListener('mousemove', function(evt) {
         var mousePos = calculateMousePos(evt);
@@ -55,7 +55,7 @@ function drawEverything() {
     colorRect(0, 0, canvas.width, canvas.height, '#000000');
 
     // draw the player paddle
-    colorRect(paddleX, canvas.height - 20, PADDLE_WIDTH, PADDLE_HEIGHT, "white");
+    colorRect(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, "white");
 
 
     //draw the ball
